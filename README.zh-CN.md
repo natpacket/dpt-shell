@@ -1,8 +1,6 @@
 # dpt-shell
 
-[![](https://img.shields.io/github/license/luoyesiqiu/dpt-shell)](https://github.com/luoyesiqiu/dpt-shell/blob/main/LICENSE) [![](https://img.shields.io/github/downloads/luoyesiqiu/dpt-shell/total?color=blue)](https://github.com/luoyesiqiu/dpt-shell/releases/latest) [![](https://img.shields.io/github/issues-raw/luoyesiqiu/dpt-shell?color=red)](https://github.com/luoyesiqiu/dpt-shell/issues) ![](https://img.shields.io/badge/Android-6.0%2B-brightgreen)
-
-## 介绍
+[![](https://img.shields.io/github/license/luoyesiqiu/dpt-shell)](https://github.com/luoyesiqiu/dpt-shell/blob/main/LICENSE) [![](https://img.shields.io/github/downloads/luoyesiqiu/dpt-shell/total?color=blue)](https://github.com/luoyesiqiu/dpt-shell/releases/latest) [![](https://img.shields.io/github/issues-raw/luoyesiqiu/dpt-shell?color=red)](https://github.com/luoyesiqiu/dpt-shell/issues) ![](https://img.shields.io/badge/Android-5.0%2B-brightgreen)
 
 [English](./README.md) | 简体中文 
 
@@ -23,8 +21,7 @@ java -jar dpt.jar -f /path/to/apk
 ```shell
 git clone --recursive https://github.com/luoyesiqiu/dpt-shell
 cd dpt-shell
-gradlew dpt:assemble
-gradlew shell:assemble
+./gradlew assemble
 cd executable
 java -jar dpt.jar -f /path/to/apk
 ```
@@ -39,7 +36,7 @@ usage: java -jar dpt.jar [option] -f <apk>
  -D,--debug            Make apk debuggable.
  -f,--apk-file <arg>   Need to protect apk file.
  -l,--noisy-log        Open noisy log.
- -s,--no-sign          Do not sign apk.
+ -x,--no-sign          Do not sign apk.
 ```
 
 ## 原理解析
@@ -50,7 +47,7 @@ usage: java -jar dpt.jar [option] -f <apk>
 
 本项目未经大量测试，仅用于学习交流，不要线上使用，否则自行承担后果。
 
-## 本项目使用或依赖以下开源项目
+## 使用或依赖以下项目
 
 - [dx](https://android.googlesource.com/platform/dalvik/+/refs/heads/master/dx/)
 - [Dobby](https://github.com/jmpews/Dobby)
@@ -62,3 +59,4 @@ usage: java -jar dpt.jar [option] -f <apk>
 - [minizip-ng](https://github.com/zlib-ng/minizip-ng)
 - [JSON-java](https://github.com/stleary/JSON-java)
 - [zip4j](https://github.com/srikanth-lingala/zip4j)
+- [commons-cli](https://github.com/apache/commons-cli)

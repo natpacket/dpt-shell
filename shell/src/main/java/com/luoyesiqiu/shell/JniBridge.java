@@ -17,13 +17,13 @@ public class JniBridge {
     private static final String TAG = JniBridge.class.getSimpleName();
     public static native void craoc(String applicationClassName);
     public static native void craa(Context context, String applicationClassName);
-    public static native void ia(Context context);
+    public static native void ia();
     public static native String rcf();
     public static native void mde(ClassLoader targetClassLoader);
     public static native void rde(ClassLoader classLoader,String elementName);
     public static native String gap();
     public static native String gdp();
-    public static native void ra(String originApplicationClassName);
+    public static native Object ra(String originApplicationClassName);
     public static native String rapn();
 
     public static void loadShellLibs(String workspacePath,String apkPath) {

@@ -15,12 +15,14 @@
 #include <pthread.h>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
-#include "dex/CodeItem.h"
+#include "dpt_jni.h"
+#include "dpt_util.h"
+#include "dpt_risk.h"
 #include "common/dpt_log.h"
 #include "dpt_hook.h"
 #include "dex/MultiDexCode.h"
-#include "dpt_jni.h"
-#include "dpt_util.h"
+#include "dex/CodeItem.h"
+
 #include "reflect/dalvik_system_BaseDexClassLoader.h"
 #include "reflect/dalvik_system_DexPathList.h"
 #include "reflect/java_util_ArrayList.h"
@@ -35,7 +37,7 @@ void callRealApplicationAttach(JNIEnv *env, jclass, jobject context,
                                          jstring realApplicationClassName);
 
 INIT_ARRAY_SECTION void init_dpt();
-void init_app(JNIEnv* env,jclass __unused,jobject context);
+void init_app(JNIEnv* env,jclass __unused);
 void readCodeItem(uint8_t *data,size_t data_len);
 jstring readAppComponentFactory(JNIEnv *env,jclass __unused);
 jstring readApplicationName(JNIEnv *env, jclass __unused);
@@ -43,7 +45,7 @@ jobjectArray makePathElements(JNIEnv* env,const char *pathChs);
 void mergeDexElement(JNIEnv* env,jclass __unused, jobject targetClassLoader,const char* pathChs);
 void mergeDexElements(JNIEnv* env,jclass __unused,jobject targetClassLoader);
 void removeDexElements(JNIEnv* env,jclass __unused,jobject classLoader,jstring elementName);
-void replaceApplication(JNIEnv *env, jclass __unused, jstring originApplication);
+jobject replaceApplication(JNIEnv *env, jclass __unused, jstring originApplication);
 void replaceApplicationOnActivityThread(JNIEnv *env,jclass __unused, jobject realApplication);
 void replaceApplicationOnLoadedApk(JNIEnv *env, jclass __unused, jobject realApplication);
 std::unordered_map<int,std::unordered_map<int,dpt::data::CodeItem*>*> dexMap;

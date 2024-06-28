@@ -111,11 +111,12 @@ public class Apk extends AndroidPackage {
 
         LogUtils.info("Apk main process path: " + apkMainProcessPath);
 
-        ZipUtils.extractAPK(apk.getFilePath(),apkMainProcessPath);
+        ZipUtils.unZip(apk.getFilePath(),apkMainProcessPath);
         String packageName = ManifestUtils.getPackageName(apkMainProcessPath + File.separator + "AndroidManifest.xml");
         apk.setPackageName(packageName);
         apk.extractDexCode(apkMainProcessPath);
 
+        apk.addJunkCodeDex(apkMainProcessPath);
         apk.compressDexFiles(apkMainProcessPath);
         apk.deleteAllDexFiles(apkMainProcessPath);
 
@@ -239,8 +240,13 @@ public class Apk extends AndroidPackage {
         addDex(proxyDexPath,apkDir);
     }
 
+    protected void addJunkCodeDex(String apkDir) {
+        String junkCodeDexPath = "shell-files/dex/junkcode.dex";
+        addDex(junkCodeDexPath,apkDir);
+    }
+
     private void compressDexFiles(String apkDir){
-        ZipUtils.compress(getDexFiles(apkDir),getOutAssetsDir(apkDir).getAbsolutePath()+File.separator + "i11111i111");
+        ZipUtils.compress(getDexFiles(apkDir),getOutAssetsDir(apkDir).getAbsolutePath()+File.separator + "i11111i111.zip");
     }
 
     private void copyNativeLibs(String apkDir){
@@ -375,7 +381,7 @@ public class Apk extends AndroidPackage {
         String apkLastProcessDir = getLastProcessDir().getAbsolutePath();
 
         String unzipalignApkPath = savePath + File.separator + getUnzipalignApkName(originApkName);
-        ZipUtils.compressToApk(unpackFilePath, unzipalignApkPath);
+        ZipUtils.zip(unpackFilePath, unzipalignApkPath);
 
         String keyStoreFilePath = apkLastProcessDir + File.separator + "debug.keystore";
 

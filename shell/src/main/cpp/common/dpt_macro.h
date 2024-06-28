@@ -5,17 +5,21 @@
 #ifndef DPT_DPT_MACRO_H
 #define DPT_DPT_MACRO_H
 
+#include "banned.h"
+
 #define SECTION(name) __attribute__ ((section(name)))
 #define KEEP_SYMBOL __attribute__((visibility("default")))
 #define INIT_ARRAY_SECTION __attribute__ ((constructor))
+#define ALWAYS_INLINE static inline __attribute__((always_inline))
+#define SYS_INLINE ALWAYS_INLINE
 
-#define DEXES_ZIP_NAME "i11111i111"
+#define DEXES_ZIP_NAME "i11111i111.zip"
 #define CACHE_DIR "code_cache"
 
 #define ACF_NAME_IN_ZIP "assets/app_acf"
 #define APP_NAME_IN_ZIP "assets/app_name"
 #define CODE_ITEM_NAME_IN_ZIP "assets/OoooooOooo"
-#define DEX_FILES_NAME_IN_ZIP "assets/i11111i111"
+#define DEX_FILES_NAME_IN_ZIP "assets/i11111i111.zip"
 
 #define CODE_ITEM_NAME_IN_ASSETS "OoooooOooo"
 
@@ -24,14 +28,14 @@
 
 #ifdef __LP64__
 #define LIB_DIR "lib64"
-#define pointer_t uint64_t
+
 #define FMT_POINTER "0x%lx"
 #define FMT_UNSIGNED_INT "%u"
 #define FMT_UNSIGNED_LONG "%lu"
 #define FMT_INT64_T "%ld"
 #else
 #define LIB_DIR "lib"
-#define pointer_t uint32_t
+
 #define FMT_POINTER "0x%x"
 #define FMT_UNSIGNED_INT "%u"
 #define FMT_UNSIGNED_LONG "%lu"
@@ -57,5 +61,15 @@
 #ifndef UNLIKELY
 #define UNLIKELY(x) __builtin_expect(!!(x), 0)
 #endif
+
+#define ARRAY_LENGTH(array) (sizeof(array) / sizeof(array[0]))
+
+#define DPT_FREE(addr) do { \
+    if(addr) {              \
+        free(addr);         \
+        addr = nullptr;     \
+    }                       \
+}                           \
+while(0)
 
 #endif //DPT_DPT_MACRO_H
